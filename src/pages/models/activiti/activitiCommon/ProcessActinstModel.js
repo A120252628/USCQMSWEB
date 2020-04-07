@@ -57,7 +57,6 @@ export default {
         payload: { engine, list, processReverseList }
       }
     ) {
-      console.log(processReverseList)
       return { ...state, engine, list, processReverseList }
     }
   },
@@ -80,7 +79,6 @@ export default {
       let { data } = yield call(commonService.post, '/act/process/getProcessReverseList', {
         processInstanceId: processInstanceId
       })
-      console.log(allList)
       yield put({
         type: 'processReverseList',
         payload: {

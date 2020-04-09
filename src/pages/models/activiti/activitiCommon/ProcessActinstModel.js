@@ -83,7 +83,7 @@ export default {
         type: 'processReverseList',
         payload: {
           engine: allList.data.dataList[0].resultModel,
-          list: allList.data.dataList[0].resultItemList.dataList,
+          list: allList.data.dataList[0].resultItemList,
           processReverseList: data.dataList
         }
       })

@@ -31,7 +31,7 @@ class MsgListenerForm extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form
-    const { ID, NO, NAME, QUEUES } = this.props.record
+    const { ID, NO, NAME, QUEUES, ENNAME } = this.props.record
 
     const onRules = (rule, value, callback) => {
       let list = this.props.list
@@ -86,6 +86,13 @@ class MsgListenerForm extends Component {
                 </th>
               </tr>
               <tr>
+                <td>
+                  <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='英文名称'>
+                    {getFieldDecorator('ENNAME', {
+                      initialValue: ENNAME
+                    })(<Input />)}
+                  </FormItem>
+                </td>
                 <th WIDTH='50%'>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='消息队列'>
                     {getFieldDecorator('QUEUES', {

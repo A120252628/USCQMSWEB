@@ -41,7 +41,7 @@ class PropertyForm extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form
-    let { NO, NAME, ID, WIDTH, COLUMNS, PEPTIDE } = this.props.record
+    let { NO, NAME, ID, WIDTH, COLUMNS, PEPTIDE, ENNAME } = this.props.record
     const onRules = (rule, value, callback) => {
       let list = this.props.list
       if (ID) {
@@ -96,6 +96,13 @@ class PropertyForm extends Component {
               </tr>
               <tr>
                 <th>
+                  <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='英文名称'>
+                    {getFieldDecorator('ENNAME', {
+                      initialValue: ENNAME
+                    })(<Input />)}
+                  </FormItem>
+                </th>
+                <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='列数'>
                     {getFieldDecorator('COLUMNS', {
                       initialValue: COLUMNS
@@ -108,6 +115,8 @@ class PropertyForm extends Component {
                     )}
                   </FormItem>
                 </th>
+              </tr>
+              <tr>
                 <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='宽度'>
                     {getFieldDecorator('WIDTH', {
@@ -115,8 +124,6 @@ class PropertyForm extends Component {
                     })(<Input addonAfter='px' />)}
                   </FormItem>
                 </th>
-              </tr>
-              <tr>
                 <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='多肽'>
                     {getFieldDecorator('PEPTIDE', {

@@ -1,7 +1,7 @@
 /*
  * @Author: hjh
  * @Date: 2019-12-16 13:53:29
- * @LastEditTime: 2020-03-24 09:36:41
+ * @LastEditTime: 2020-04-14 09:03:55
  * @Descripttion: 全局表格
  */
 
@@ -44,6 +44,11 @@ const columns = [
         </Ellipsis>
       )
     }
+  },
+  {
+    title: '英文名称',
+    dataIndex: 'ENNAME',
+    width: 200
   },
   {
     title: '备注',

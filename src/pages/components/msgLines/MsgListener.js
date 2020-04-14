@@ -23,6 +23,11 @@ const columns = [
     width: 100
   },
   {
+    title: '英文名称',
+    dataIndex: 'ENNAME',
+    width: 200
+  },
+  {
     title: '监听队列',
     dataIndex: 'QUEUES',
     width: 100

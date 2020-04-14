@@ -42,7 +42,7 @@ class MqAffairForm extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form
-    const { NO, NAME, MCONTENT, ID, CHANNELNAME, MTYPE } = this.props.record
+    const { NO, NAME, MCONTENT, ID, CHANNELNAME, MTYPE, ENNAME } = this.props.record
     return (
       <div>
         <Form onSubmit={this.Ok}>
@@ -68,6 +68,13 @@ class MqAffairForm extends Component {
               </tr>
               <tr>
                 <td>
+                  <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='英文名称'>
+                    {getFieldDecorator('ENNAME', {
+                      initialValue: ENNAME
+                    })(<Input />)}
+                  </FormItem>
+                </td>
+                <td>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='总线名称'>
                     {getFieldDecorator('CHANNELNAME', {
                       rules: [{ required: true, message: '此项必填!' }],
@@ -83,6 +90,8 @@ class MqAffairForm extends Component {
                     )}
                   </FormItem>
                 </td>
+              </tr>
+              <tr>
                 <td>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='执行类型'>
                     {getFieldDecorator('MTYPE', {
@@ -99,14 +108,14 @@ class MqAffairForm extends Component {
                 </td>
               </tr>
               <tr>
-                <th colSpan='2'>
+                <td colSpan='2'>
                   <FormItem {...formItemLayout2} style={{ marginBottom: 0 }} label='执行内容'>
                     {getFieldDecorator('MCONTENT', {
                       rules: [{ required: true, message: '此项必填!' }],
                       initialValue: MCONTENT
                     })(<Input.TextArea />)}
                   </FormItem>
-                </th>
+                </td>
               </tr>
             </tbody>
           </table>

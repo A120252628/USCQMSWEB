@@ -47,7 +47,7 @@ class PropertyItemForm extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form
-    const { ID, NO, NAME, EDITABLE, WLINE } = this.props.record
+    const { ID, NO, NAME, EDITABLE, WLINE, ENNAME } = this.props.record
 
     const onRules = (rule, value, callback) => {
       let list = this.props.list
@@ -103,6 +103,13 @@ class PropertyItemForm extends Component {
                 </th>
               </tr>
               <tr>
+                <th>
+                  <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='英文名称'>
+                    {getFieldDecorator('ENNAME', {
+                      initialValue: ENNAME
+                    })(<Input />)}
+                  </FormItem>
+                </th>
                 <th width='50%'>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='可编辑'>
                     {getFieldDecorator('EDITABLE', {
@@ -111,6 +118,8 @@ class PropertyItemForm extends Component {
                     })(<Checkbox />)}
                   </FormItem>
                 </th>
+              </tr>
+              <tr>
                 <th width='50%'>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='整行'>
                     {getFieldDecorator('WLINE', {

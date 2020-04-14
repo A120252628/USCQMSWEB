@@ -1,7 +1,7 @@
 /*
  * @Author: hjh
  * @Date: 2019-12-12 11:40:58
- * @LastEditTime : 2020-01-03 16:37:38
+ * @LastEditTime: 2020-04-14 09:03:23
  * @Descripttion: 导航菜单
  */
 import React from 'react'
@@ -17,6 +17,11 @@ const columns = [
     title: '菜单名称',
     dataIndex: 'NAME',
     width: 250
+  },
+  {
+    title: '英文名称',
+    dataIndex: 'ENNAME',
+    width: 200
   },
   {
     title: '菜单编码',

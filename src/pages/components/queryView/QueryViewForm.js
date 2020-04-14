@@ -31,7 +31,7 @@ class EditRelationForm extends Component {
   render() {
     const { form, record, itemList } = this.props
     const { getFieldDecorator } = form
-    const { ID, NO, NAME, ITEMNO, WCONDITION, CONTROLAUTH, COPYABLE, STATE } = record
+    const { ID, NO, NAME, ITEMNO, WCONDITION, CONTROLAUTH, COPYABLE, STATE, ENNAME } = record
     return (
       <Form>
         <table width='100%'>
@@ -56,6 +56,13 @@ class EditRelationForm extends Component {
             </tr>
             <tr>
               <th>
+                <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='英文名称'>
+                  {getFieldDecorator('ENNAME', {
+                    initialValue: ENNAME
+                  })(<Input />)}
+                </FormItem>
+              </th>
+              <th>
                 <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='查询对象'>
                   {getFieldDecorator('ITEMNO', {
                     rules: [{ required: true, message: '必填项!' }],
@@ -71,6 +78,8 @@ class EditRelationForm extends Component {
                   )}
                 </FormItem>
               </th>
+            </tr>
+            <tr>
               <th>
                 <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='查询条件'>
                   {getFieldDecorator('WCONDITION', {
@@ -79,8 +88,6 @@ class EditRelationForm extends Component {
                   })(<TextArea />)}
                 </FormItem>
               </th>
-            </tr>
-            <tr>
               <th>
                 <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='控制权限'>
                   {getFieldDecorator('CONTROLAUTH', {
@@ -94,6 +101,8 @@ class EditRelationForm extends Component {
                   )}
                 </FormItem>
               </th>
+            </tr>
+            <tr>
               <th>
                 <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='支持复制'>
                   {getFieldDecorator('COPYABLE', {
@@ -107,8 +116,6 @@ class EditRelationForm extends Component {
                   )}
                 </FormItem>
               </th>
-            </tr>
-            <tr>
               <th>
                 <FormItem {...formItemLayout} style={{ marginBottom: 0 }}>
                   {getFieldDecorator('ID', {

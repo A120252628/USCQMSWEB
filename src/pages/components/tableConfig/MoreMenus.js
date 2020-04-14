@@ -17,6 +17,11 @@ const MoreMenus = ({ visible, onCancel, record, PID, menuList, onOk, itemNo, cla
       width: 150
     },
     {
+      title: '英文名称',
+      dataIndex: 'ENNAME',
+      width: 200
+    },
+    {
       title: '菜单编码',
       dataIndex: 'NO',
       width: 150

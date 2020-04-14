@@ -2,7 +2,6 @@ import React from 'react'
 import Engine from '../../components/engine/Engine'
 import * as commonService from '../../service/commonService'
 import Home from '../../components/base/Home'
-import routerConfig from '../../routes/routerConfig/routerConfig'
 import routerConfigData from '../../routes/routerConfig/routerConfigData'
 import { ergodicRoot, judgeModel } from '../../../utils/utils'
 import { hideContextMenu } from '../../../utils/contextMenuFunc'
@@ -24,6 +23,9 @@ export default {
 
   //同步
   reducers: {
+    packet(state, { payload }) {
+      return { ...state, ...payload }
+    },
     addTab(state, { payload }) {
       const { data } = payload
       const { namespace, name, icon } = data
@@ -52,9 +54,27 @@ export default {
         // let routerDatas = routerConfig() //获取RouterConfigData
         let routerData = routerConfigData.find(data => data.namespace === NO)
         if (!routerData) return
-        const { component, namespace } = routerData
+        const { component } = routerData
         const Cmp = component
-        panes.push({ title: NAME, icon: ICON, content: <Cmp />, key: namespace, closable: true })
+        panes.push({ title: NAME, icon: ICON, content: <Cmp />, key: NO, closable: true })
+      }
+      return { ...state, activeKey: NO, panes }
+    },
+    addReportTab(state, { payload }) {
+      const { NAME, ICON, NO, PARAMS } = payload
+      const { reportId, url, isBddp } = PARAMS
+      const { panes } = state
+      const isExists = panes.some(item => item.key === NO)
+      if (!isExists) {
+        const Cmp = () => (
+          <iframe
+            width='100%'
+            height='100%'
+            title={NO}
+            src={url || `http://127.0.0.1:18080/RDP-SERVER/${isBddp ? 'bddpshow/show' : 'rdppage/main'}/${reportId}`}
+          />
+        )
+        panes.push({ title: NAME, icon: ICON, content: <Cmp />, key: NO, closable: true })
       }
       return { ...state, activeKey: NO, panes }
     },
@@ -85,15 +105,20 @@ export default {
   },
   //异步
   effects: {
-    *queryMeta({ payload }, { put }) {
+    *queryMeta({ payload }, { put, select }) {
       const { item } = payload
-      yield put({ type: 'menu/packet', payload: { selectedKeys: [item.ID] } })
+      const { selectedRows = [] } = yield select(state => state.menu)
+      const isExists = selectedRows.some(row => row.ID === item.ID)
+      if (!isExists) selectedRows.push(item)
+      yield put({ type: 'menu/packet', payload: { selectedKeys: [item.ID], selectedRows } })
       let { PARAMS, ID, FACETYPE, NAME, ICON, NO, SUPQUERY } = item
       if (PARAMS) {
         PARAMS = JSON.parse(PARAMS)
       }
       // 有facetype为配置界面
-      if (FACETYPE && PARAMS) {
+      if (FACETYPE === 6) {
+        yield put({ type: 'addReportTab', payload: { NAME, ICON, NO, ID, PARAMS } })
+      } else if (FACETYPE && PARAMS) {
         //查询页面数据
         yield put({ type: 'query', payload: { PARAMS, ID, FACETYPE, NAME, ICON, SUPQUERY } })
       } else {

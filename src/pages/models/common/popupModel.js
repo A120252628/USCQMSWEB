@@ -1,7 +1,7 @@
 /*
  * @Author: hjh
  * @Date: 2019-08-01 11:24:29
- * @LastEditTime: 2020-03-25 15:54:28
+ * @LastEditTime: 2020-04-10 15:25:15
  * @Descripttion: 点击按钮弹出窗口相关的请求
  */
 import * as commonService from '../../service/commonService'
@@ -19,6 +19,7 @@ const renderDiv = (name, Page) => {
     document.body.appendChild(div)
   }
   //渲染页面
+  console.log(window.g_app._store)
   ReactDOM.render(
     <Provider store={window.g_app._store}>
       <Page />

@@ -36,6 +36,11 @@ const columns = [
     ...getColumnSearchProps('NAME', '字段名称')
   },
   {
+    title: '英文名称',
+    dataIndex: 'ENNAME',
+    width: 200
+  },
+  {
     title: '字段类型',
     dataIndex: 'FTYPE',
     width: 100,

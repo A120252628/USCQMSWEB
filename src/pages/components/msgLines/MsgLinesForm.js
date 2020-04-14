@@ -29,7 +29,7 @@ class MsgLinesForm extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form
-    const { NO, NAME, REMARK, ID } = this.props.record
+    const { NO, NAME, REMARK, ID, ENNAME } = this.props.record
 
     const onRules = (rule, value, callback) => {
       let fieldList = this.props.list
@@ -79,6 +79,13 @@ class MsgLinesForm extends Component {
                 </td>
               </tr>
               <tr>
+                <td>
+                  <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='英文名称'>
+                    {getFieldDecorator('ENNAME', {
+                      initialValue: ENNAME
+                    })(<Input />)}
+                  </FormItem>
+                </td>
                 <td>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='备注'>
                     {getFieldDecorator('REMARK', {

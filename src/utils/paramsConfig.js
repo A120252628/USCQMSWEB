@@ -1,7 +1,7 @@
 /*
  * @Author: hjh
  * @Date: 2019-08-09 16:50:41
- * @LastEditTime: 2020-03-24 09:51:47
+ * @LastEditTime: 2020-04-07 16:04:24
  * @Descripttion: 参数集合
  */
 export const reqParamMap = [
@@ -87,6 +87,7 @@ export const facetypeMap = [
   { value: 3, name: '三级关联页面' },
   { value: 4, name: '分类关联页面' },
   { value: 5, name: '自动分类页面' },
+  { value: 6, name: '报表页面' },
   { value: 21, name: '质检录入页面' }
 ]
 

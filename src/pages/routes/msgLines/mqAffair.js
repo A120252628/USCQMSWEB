@@ -1,7 +1,7 @@
 /*
  * @Author: hjh
  * @Date: 2019-12-16 13:53:29
- * @LastEditTime: 2020-03-24 09:53:02
+ * @LastEditTime: 2020-03-26 15:40:12
  * @Descripttion: 消息事务
  */
 
@@ -21,6 +21,11 @@ const columns = [
   {
     title: '名称',
     dataIndex: 'NAME',
+    width: 200
+  },
+  {
+    title: '英文名称',
+    dataIndex: 'ENNAME',
     width: 200
   },
   {

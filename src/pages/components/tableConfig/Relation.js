@@ -1,7 +1,7 @@
 /*
  * @Author: hjh
  * @Date: 2019-07-29 13:56:31
- * @LastEditTime : 2020-01-03 16:36:30
+ * @LastEditTime: 2020-03-26 15:39:45
  * @Descripttion: 对象关联页组件
  */
 
@@ -54,6 +54,11 @@ const Relation = ({ dispatch, relation, PID, relationList, relationItemList, dis
       title: '关联页名称',
       dataIndex: 'NAME',
       width: 120
+    },
+    {
+      title: '英文名称',
+      dataIndex: 'ENNAME',
+      width: 200
     }
   ]
 
@@ -62,6 +67,11 @@ const Relation = ({ dispatch, relation, PID, relationList, relationItemList, dis
       title: '页签标题',
       dataIndex: 'NAME',
       width: 120
+    },
+    {
+      title: '英文名称',
+      dataIndex: 'ENNAME',
+      width: 200
     },
     {
       title: '关联页类型',

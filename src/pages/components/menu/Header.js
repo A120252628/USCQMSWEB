@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './index.css'
-import { Dropdown, Avatar, Divider, Button, Menu, Modal, Layout } from 'antd'
+import { Dropdown, Avatar, Divider, Button, Menu, Modal, Layout, Select } from 'antd'
 import Notice from '../../routes/notice/Notice'
 import { connect } from 'dva'
 import OnlineUser from '../user/OnlineUser'
@@ -10,11 +10,13 @@ import UserInfoForm from '../user/UserInfoForm'
 import logo from '../../../assets/infinity-logo.png'
 
 const { Header } = Layout
+const { Option } = Select
 
 const HeaderCmp = ({ dispatch, user, theme }) => {
   const DividerCmp = <Divider type='vertical' style={{ background: theme ? '#fff' : '#000' }} />
   const employeeName = localStorage.getItem('employeeName')
   const userName = localStorage.getItem('userName')
+  const AcceptLanguage = localStorage.getItem('AcceptLanguage')
   const { isModeling, visible, infoVisible, userInfo } = user
   const toogleModal = () => {
     dispatch({ type: 'user/toogleModal' })
@@ -70,6 +72,9 @@ const HeaderCmp = ({ dispatch, user, theme }) => {
   const toogleInfo = () => {
     dispatch({ type: 'user/toogleInfo' })
   }
+  const languageChange = val => {
+    dispatch({ type: 'user/changeLanguage', payload: { val } })
+  }
   const menu = (
     <Menu>
       {employeeName !== 'admin' && <Menu.Item onClick={queryUserInfo}>个人信息</Menu.Item>}
@@ -80,10 +85,14 @@ const HeaderCmp = ({ dispatch, user, theme }) => {
   return (
     <Header className={`${styles.layout_header} ${theme && styles.header_dark}`}>
       <div className={`${styles.layout_title} ${theme && styles.title_dark}`}>
-        {/* 质量管理系统 */}
         <img src={logo} className={styles.header_logo} alt='logo' />
       </div>
       <div className={styles.layout_header_div_message}>
+        <Select onChange={languageChange} defaultValue={AcceptLanguage} style={{ width: 100 }}>
+          <Option value='zh-CN'>中文</Option>
+          <Option value='en-US'>English</Option>
+        </Select>
+        {DividerCmp}
         {(userName === 'admin' || userName === 'hjh' || userName === 'lwp') && (
           <span>
             {/* {isModeling && (

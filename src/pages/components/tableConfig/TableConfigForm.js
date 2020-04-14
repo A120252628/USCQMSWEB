@@ -1,7 +1,7 @@
 /*
  * @Author: hjh
  * @Date: 2019-07-29 16:29:06
- * @LastEditTime : 2019-12-23 17:37:41
+ * @LastEditTime: 2020-03-26 15:05:20
  * @Descripttion: 配置平台表单弹窗
  */
 
@@ -83,7 +83,8 @@ class TableConfigForm extends Component {
       REMARK,
       BRIEFEXP,
       IMPLCLASS,
-      STATE
+      STATE,
+      ENNAME
     } = this.props.record
     if (QUERYFIELDS) {
       QUERYFIELDS = QUERYFIELDS.split(',')
@@ -167,18 +168,10 @@ class TableConfigForm extends Component {
                   </FormItem>
                 </th>
                 <th>
-                  <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='对象类型'>
-                    {getFieldDecorator('TYPE', {
-                      rules: [{ required: true, message: '此项必填!' }],
-                      initialValue: TYPE
-                    })(
-                      <Select initialValue={TYPE} style={{ width: '100%' }} disabled>
-                        <Option value={0}>普通对象</Option>
-                        <Option value={1}>文件对象</Option>
-                        <Option value={2}>关联对象</Option>
-                        <Option value={3}>分类对象</Option>
-                      </Select>
-                    )}
+                  <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='英文名称'>
+                    {getFieldDecorator('ENNAME', {
+                      initialValue: ENNAME
+                    })(<Input />)}
                   </FormItem>
                 </th>
               </tr>
@@ -211,6 +204,21 @@ class TableConfigForm extends Component {
               </tr>
               <tr>
                 <th>
+                  <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='对象类型'>
+                    {getFieldDecorator('TYPE', {
+                      rules: [{ required: true, message: '此项必填!' }],
+                      initialValue: TYPE
+                    })(
+                      <Select initialValue={TYPE} style={{ width: '100%' }} disabled>
+                        <Option value={0}>普通对象</Option>
+                        <Option value={1}>文件对象</Option>
+                        <Option value={2}>关联对象</Option>
+                        <Option value={3}>分类对象</Option>
+                      </Select>
+                    )}
+                  </FormItem>
+                </th>
+                <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='快速查询字段'>
                     {getFieldDecorator('QUERYFIELDS', {
                       initialValue: QUERYFIELDS
@@ -225,6 +233,8 @@ class TableConfigForm extends Component {
                     )}
                   </FormItem>
                 </th>
+              </tr>
+              <tr>
                 <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='简单表达式'>
                     {getFieldDecorator('BRIEFEXP', {
@@ -232,8 +242,6 @@ class TableConfigForm extends Component {
                     })(<Input />)}
                   </FormItem>
                 </th>
-              </tr>
-              <tr>
                 <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='实现类'>
                     {getFieldDecorator('IMPLCLASS', {
@@ -241,6 +249,8 @@ class TableConfigForm extends Component {
                     })(<Input />)}
                   </FormItem>
                 </th>
+              </tr>
+              <tr>
                 <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='备注'>
                     {getFieldDecorator('REMARK', {

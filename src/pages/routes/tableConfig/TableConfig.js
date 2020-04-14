@@ -1,7 +1,7 @@
 /*
  * @Author: hjh
  * @Date: 2019-07-29 13:56:31
- * @LastEditTime : 2019-12-26 17:42:58
+ * @LastEditTime: 2020-03-30 11:27:42
  * @Descripttion: 配置平台
  */
 
@@ -50,6 +50,11 @@ const columns = [
   {
     title: '业务对象名称',
     dataIndex: 'NAME',
+    width: 200
+  },
+  {
+    title: '英文名称',
+    dataIndex: 'ENNAME',
     width: 200
   },
   {
@@ -109,6 +114,7 @@ const TableConfig = ({ dispatch, tableConfig, isModeling }) => {
     modalFooter = true
   } = tableConfig
 
+  console.log(localStorage.getItem('AcceptLanguage'))
   const { STATE, EFFECTIVE } = selectedRows[0] || {}
   let disabled = !(selectedRows[0] && isModeling && (STATE === 'U' || STATE === 'C'))
 

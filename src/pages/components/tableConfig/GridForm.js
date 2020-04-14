@@ -46,7 +46,7 @@ class GridForm extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form
-    let { no, name, id, type } = this.props.record
+    let { no, name, id, type, ENNAME } = this.props.record
 
     const onRules = (rule, value, callback) => {
       let list = this.props.list
@@ -92,6 +92,13 @@ class GridForm extends Component {
                 </th>
               </tr>
               <tr>
+                <th>
+                  <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='英文名称'>
+                    {getFieldDecorator('ENNAME', {
+                      initialValue: ENNAME
+                    })(<Input />)}
+                  </FormItem>
+                </th>
                 <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='表格类型'>
                     {getFieldDecorator('type', {

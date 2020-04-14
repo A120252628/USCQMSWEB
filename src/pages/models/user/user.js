@@ -1,6 +1,6 @@
 import * as commonService from '../../service/commonService'
 import { message, notification } from 'antd'
-import { compareUpdate } from '../../../utils/utils'
+import { compareUpdate, judgeModel } from '../../../utils/utils'
 export default {
   namespace: 'user',
   state: {
@@ -119,6 +119,40 @@ export default {
         }
       } else {
         message.error(data.info)
+      }
+    },
+    *changeLanguage(
+      {
+        payload: { val }
+      },
+      { call, put, select }
+    ) {
+      let { data } = yield call(commonService.post, '/language/switch', val)
+      if (data) {
+        const { dataList } = data
+        localStorage.setItem('menuData', JSON.stringify(dataList))
+        localStorage.setItem('AcceptLanguage', val)
+        yield put({ type: 'menu/query' })
+        const { selectedRows = [] } = yield select(state => state.menu)
+        const { panes = [] } = yield select(state => state.tab)
+        yield put({ type: 'tab/closeTab', payload: {} })
+        yield put({ type: 'tab/packet', payload: { clickedPanes: [] } })
+        const len1 = dataList.length
+        const len2 = selectedRows.length
+        for (let i = 0; i < len2; i++) {
+          if (selectedRows[i].FACETYPE && judgeModel(panes[i + 1].key)) window.g_app.unmodel(panes[i + 1].key)
+        }
+        for (let j = 0; j < len2; j++) {
+          let pageItem = selectedRows[j]
+          if (selectedRows[j].SORT) {
+            for (let i = 0; i < len1; i++) {
+              if (dataList[i].ID === selectedRows[j].ID) {
+                pageItem = dataList[i]
+              }
+            }
+          }
+          yield put({ type: 'tab/queryMeta', payload: { item: pageItem } })
+        }
       }
     }
   }

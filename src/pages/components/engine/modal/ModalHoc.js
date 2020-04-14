@@ -1,7 +1,7 @@
 /*
  * @Author: hjh
  * @Date: 2019-10-31 09:32:24
- * @LastEditTime: 2020-03-25 15:34:43
+ * @LastEditTime: 2020-03-27 14:24:49
  * @Descripttion: 弹窗通用高阶组件
  */
 import { Component } from 'react'
@@ -89,15 +89,15 @@ const ModalHoc = engine => WrappedComponent => {
     }
 
     render() {
-      let title = '弹窗'
+      let title = ''
       const { model } = this.props
       let wtype = ''
       const { clickButton } = model || {}
       let btnsCmp = []
       if (clickButton) {
         wtype = clickButton.wtype
-        const { name, btns, title: newTitle } = clickButton
-        title = newTitle || name
+        const { name, btns } = clickButton
+        title = name
         if (btns && btns instanceof Array) {
           btnsCmp = btns.map((item, index) => (
             <Button type='primary' key={index} onClick={this.onClick.bind(this, item)} icon={item.icon}>
@@ -122,7 +122,7 @@ const ModalHoc = engine => WrappedComponent => {
         <Modal
           width={engine.width || '80%'}
           title={title}
-          visible={model[`modal-${engine.btnId}`]}
+          visible={model && model[`modal-${engine.btnId}`]}
           onCancel={() => this.toogleModal(false)}
           onOk={this.onOk}
           footer={wtype === 'itemRelationPage' ? null : btnsCmp}

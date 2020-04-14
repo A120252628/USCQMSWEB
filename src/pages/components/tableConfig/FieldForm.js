@@ -1,7 +1,7 @@
 /*
  * @Author: hjh
  * @Date: 2019-08-10 10:02:55
- * @LastEditTime: 2020-03-25 15:18:24
+ * @LastEditTime: 2020-03-26 15:18:50
  * @Descripttion:
  */
 import React, { Component, Fragment } from 'react'
@@ -173,7 +173,8 @@ class FieldForm extends Component {
       STATE,
       SUPQUERY,
       SUPLINK,
-      LINKPARAMS
+      LINKPARAMS,
+      ENNAME
     } = this.props.record //声明record
 
     const { itemNo, condition } = JSON.parse(LINKPARAMS || '{}')
@@ -256,6 +257,15 @@ class FieldForm extends Component {
                   </FormItem>
                 </th>
                 <th>
+                  <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='英文名称'>
+                    {getFieldDecorator('ENNAME', {
+                      initialValue: ENNAME
+                    })(<Input />)}
+                  </FormItem>
+                </th>
+              </tr>
+              <tr>
+                <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='字段类型'>
                     {getFieldDecorator('FTYPE', {
                       initialValue: FTYPE || 'VARCHAR',
@@ -275,8 +285,6 @@ class FieldForm extends Component {
                     )}
                   </FormItem>
                 </th>
-              </tr>
-              <tr>
                 <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='字段长度'>
                     {getFieldDecorator('FLENGTH', {
@@ -285,6 +293,8 @@ class FieldForm extends Component {
                     })(<Input disabled={isFlengthDisabled} />)}
                   </FormItem>
                 </th>
+              </tr>
+              <tr>
                 <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='精度'>
                     {getFieldDecorator('ACCURACY', {
@@ -292,8 +302,6 @@ class FieldForm extends Component {
                     })(<Input disabled={isAccuracyDisabled} />)}
                   </FormItem>
                 </th>
-              </tr>
-              <tr>
                 <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='缺省值'>
                     {getFieldDecorator('DEFAULTV', {
@@ -301,6 +309,8 @@ class FieldForm extends Component {
                     })(<Input />)}
                   </FormItem>
                 </th>
+              </tr>
+              <tr>
                 <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='编辑器'>
                     {getFieldDecorator('EDITOR', {
@@ -316,8 +326,6 @@ class FieldForm extends Component {
                     )}
                   </FormItem>
                 </th>
-              </tr>
-              <tr>
                 <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='是否为空'>
                     {getFieldDecorator('ALLOWNULL', {
@@ -326,6 +334,8 @@ class FieldForm extends Component {
                     })(<Checkbox disabled={isAllownullDisabled} />)}
                   </FormItem>
                 </th>
+              </tr>
+              <tr>
                 <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='验证唯一性'>
                     {getFieldDecorator('ONLY', {
@@ -334,8 +344,6 @@ class FieldForm extends Component {
                     })(<Checkbox onChange={this.onlyChange} />)}
                   </FormItem>
                 </th>
-              </tr>
-              <tr>
                 <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='字段类别'>
                     {getFieldDecorator('TYPE', {
@@ -348,6 +356,8 @@ class FieldForm extends Component {
                     )}
                   </FormItem>
                 </th>
+              </tr>
+              <tr>
                 <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='支持高级搜索'>
                     {getFieldDecorator('SUPQUERY', {
@@ -356,8 +366,6 @@ class FieldForm extends Component {
                     })(<Checkbox />)}
                   </FormItem>
                 </th>
-              </tr>
-              <tr>
                 <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='支持超链接'>
                     {getFieldDecorator('SUPLINK', {
@@ -366,13 +374,13 @@ class FieldForm extends Component {
                     })(<Checkbox onChange={this.SUPAChange} />)}
                   </FormItem>
                 </th>
-                <th>
+                {/* <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='备注'>
                     {getFieldDecorator('REMARK', {
                       initialValue: REMARK
                     })(<TextArea autosize={{ minRows: 1 }} />)}
                   </FormItem>
-                </th>
+                </th> */}
               </tr>
               {this.state.SUPLINK && (
                 <Fragment>

@@ -234,7 +234,8 @@ class WorkMenuForm extends Component {
       ITEMNO,
       PROPERTYPARAM,
       TITLE,
-      IMPLTYPE
+      IMPLTYPE,
+      ENNAME
     } = this.props.record
     const { ICON, visible, visible2, fieldList } = this.state
     const { propertyList, relationList } = this.props.tableConfig
@@ -310,6 +311,13 @@ class WorkMenuForm extends Component {
                   ],
                   initialValue: isABAction ? (ABTYPE === 'after' ? '后处理集合' : '前处理集合') : NAME
                 })(<Input disabled={isABAction} />)}
+              </FormItem>
+            </div>
+            <div style={{ width: '50%' }}>
+              <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='英文名称'>
+                {getFieldDecorator('ENNAME', {
+                  initialValue: ENNAME
+                })(<Input />)}
               </FormItem>
             </div>
             {MTYPE !== 1 && (

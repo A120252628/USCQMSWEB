@@ -38,7 +38,7 @@ class NavForm extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form //声明验证
-    const { ID, NAME, NO, FACETYPE, ICON, SUPQUERY } = this.props.record //声明record
+    const { ID, NAME, NO, FACETYPE, ICON, SUPQUERY, ENNAME } = this.props.record //声明record
     return (
       <Form>
         <table width='100%'>
@@ -98,6 +98,13 @@ class NavForm extends Component {
                     initialValue: SUPQUERY === 0 ? false : true,
                     valuePropName: 'checked'
                   })(<Checkbox />)}
+                </FormItem>
+              </td>
+              <td>
+                <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='英文名称'>
+                  {getFieldDecorator('ENNAME', {
+                    initialValue: ENNAME
+                  })(<Input />)}
                 </FormItem>
               </td>
             </tr>

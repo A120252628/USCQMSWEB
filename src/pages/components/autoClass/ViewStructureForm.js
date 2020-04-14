@@ -1,7 +1,7 @@
 /*
  * @Author: hjh
  * @Date: 2019-09-24 10:34:12
- * @LastEditTime : 2020-01-03 09:19:17
+ * @LastEditTime: 2020-03-26 15:33:48
  * @Descripttion: 视图结构树表单
  */
 
@@ -109,7 +109,7 @@ class ViewStructureForm extends Component {
   render() {
     const { form, record, disabled } = this.props
     const { getFieldDecorator } = form
-    const { NO, NAME, NODECONDITION, DATACONDITION, ICON, PID, SUMMARY, LOADDATASET } = record || {}
+    const { NO, NAME, NODECONDITION, DATACONDITION, ICON, PID, SUMMARY, LOADDATASET, ENNAME } = record || {}
     return (
       <div style={{ width: '100%', height: '100%' }}>
         <Button disabled={disabled} onClick={this.Ok} style={{ marginRight: '5px' }} type='primary'>
@@ -155,6 +155,22 @@ class ViewStructureForm extends Component {
               </tr>
               <tr>
                 <th>
+                  <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='英文名称'>
+                    {getFieldDecorator('ENNAME', {
+                      initialValue: ENNAME
+                    })(<Input />)}
+                  </FormItem>
+                </th>
+                <th>
+                  <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='图标'>
+                    {getFieldDecorator('ICON', { initialValue: ICON })(
+                      <IconSelectorForm onOk={this.setIconName} icon={ICON} />
+                    )}
+                  </FormItem>
+                </th>
+              </tr>
+              <tr>
+                <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='显示数量'>
                     {getFieldDecorator('SUMMARY', { initialValue: SUMMARY || false, valuePropName: 'checked' })(
                       <Checkbox />
@@ -186,15 +202,6 @@ class ViewStructureForm extends Component {
                       rules: [{ required: true, message: '必填项!' }],
                       initialValue: DATACONDITION
                     })(<TextArea onFocus={this.onFocus} />)}
-                  </FormItem>
-                </th>
-              </tr>
-              <tr>
-                <th>
-                  <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='图标'>
-                    {getFieldDecorator('ICON', { initialValue: ICON })(
-                      <IconSelectorForm onOk={this.setIconName} icon={ICON} />
-                    )}
                   </FormItem>
                 </th>
               </tr>

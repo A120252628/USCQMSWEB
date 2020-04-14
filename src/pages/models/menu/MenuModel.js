@@ -8,27 +8,7 @@ const modelMenus = [
   { NAME: '全局表格', ICON: 'table', NO: 'globalTable', ID: 'globalTable', PID: 'config' },
   { NAME: '消息事务', ICON: 'read', NO: 'mqAffair', ID: 'mqAffair', PID: 'config' },
   { NAME: '信息总线', ICON: 'table', NO: 'msgLines', ID: 'msgLines', PID: 'config' },
-  { NAME: '报表工具', ICON: 'area-chart', NO: 'report', ID: 'report', PID: 'config' },
-  { NAME: '设计器', ICON: '', NO: 'design', ID: 'design', PID: 'report' },
-  {
-    NAME: '大屏设计器',
-    ICON: '',
-    NO: 'screenDesign',
-    ID: 'screenDesign',
-    PID: 'design',
-    FACETYPE: 6,
-    PARAMS: JSON.stringify({ url: 'http://127.0.0.1:18080/RDP-SERVER/modules/bddp/home.html' })
-  },
-  {
-    NAME: '网格设计器',
-    ICON: '',
-    NO: 'gridDesign',
-    ID: 'gridDesign',
-    PID: 'design',
-    FACETYPE: 6,
-    PARAMS: JSON.stringify({ url: 'http://127.0.0.1:18080/RDP-SERVER/modules/rdp/rdpDesign.html' })
-  },
-  { NAME: '报表管理', ICON: '', NO: 'reportList', ID: 'reportList', PID: 'report' },
+  { NAME: '报表管理', ICON: '', NO: 'reportList', ID: 'reportList', PID: 'config' },
   {
     NAME: '网格报表',
     ICON: '',

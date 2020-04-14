@@ -5,7 +5,6 @@ import * as commonService from '../../service/commonService'
 import Modal from '../common/Modal'
 import SelectItemNo from '../tableConfig/SelectItemNo'
 import SortFieldsForm from './SortFieldsForm'
-import fetch from 'dva/fetch'
 
 const Option = Select.Option
 const FormItem = Form.Item

@@ -1,7 +1,7 @@
 /*
  * @Author: hjh
  * @Date: 2019-08-09 16:50:41
- * @LastEditTime: 2020-04-07 16:04:24
+ * @LastEditTime: 2020-04-14 14:30:26
  * @Descripttion: 参数集合
  */
 export const reqParamMap = [
@@ -34,7 +34,8 @@ export const wtypeMap = [
   { name: '分类对象视图', value: 'classItemView' },
   { name: '批量新增', value: 'batchAdd' },
   { name: '下载', value: 'downLoad' },
-  { name: '打印', value: 'print' }
+  // { name: '打印', value: 'print' },
+  { name: '报表', value: 'report' }
 ]
 
 export const editorMap = [

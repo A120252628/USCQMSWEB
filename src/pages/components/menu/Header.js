@@ -88,11 +88,11 @@ const HeaderCmp = ({ dispatch, user, theme }) => {
         <img src={logo} className={styles.header_logo} alt='logo' />
       </div>
       <div className={styles.layout_header_div_message}>
-        <Select onChange={languageChange} defaultValue={AcceptLanguage} style={{ width: 100 }}>
+        {/* <Select onChange={languageChange} defaultValue={AcceptLanguage} style={{ width: 100 }}>
           <Option value='zh-CN'>中文</Option>
           <Option value='en-US'>English</Option>
         </Select>
-        {DividerCmp}
+        {DividerCmp} */}
         {(userName === 'admin' || userName === 'hjh' || userName === 'lwp') && (
           <span>
             {/* {isModeling && (

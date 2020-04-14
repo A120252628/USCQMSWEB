@@ -1,7 +1,7 @@
 /*
  * @Author: hjh
  * @Date: 2019-07-29 13:56:31
- * @LastEditTime : 2019-12-25 13:55:07
+ * @LastEditTime: 2020-03-26 15:39:15
  * @Descripttion: 对象菜单组件
  */
 
@@ -70,6 +70,11 @@ class Menus extends React.Component {
         title: '菜单名称',
         dataIndex: 'NAME',
         width: 300
+      },
+      {
+        title: '英文名称',
+        dataIndex: 'ENNAME',
+        width: 200
       },
       {
         title: '菜单编码',

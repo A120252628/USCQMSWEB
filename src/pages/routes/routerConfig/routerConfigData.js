@@ -46,6 +46,18 @@ const routerConfigData = [
     component: require('../../routes/globalTable/globalTable').default
   },
   {
+    namespace: 'mqAffair',
+    menuName: '消息事务',
+    icon: 'table',
+    component: require('../../routes/msgLines/mqAffair').default
+  },
+  {
+    namespace: 'msgLines',
+    menuName: '消息总线',
+    icon: 'table',
+    component: require('../../routes/msgLines/msgLines').default
+  },
+  {
     namespace: 'oaFile',
     menuName: '文件管理',
     icon: 'edit',

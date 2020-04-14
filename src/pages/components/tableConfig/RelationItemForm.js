@@ -71,7 +71,19 @@ class RelationItemForm extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form
-    const { ID, RTYPE, NAME, NO, ITEMNO, RELEVANCENAME, RELEVANCENO, ITEMGRID, ICON, SUPQUERY } = this.props.record
+    const {
+      ID,
+      RTYPE,
+      NAME,
+      NO,
+      ITEMNO,
+      RELEVANCENAME,
+      RELEVANCENO,
+      ITEMGRID,
+      ICON,
+      SUPQUERY,
+      ENNAME
+    } = this.props.record
     const { selectRtype } = this.state
 
     return (
@@ -103,6 +115,13 @@ class RelationItemForm extends Component {
                 </th>
               </tr>
               <tr>
+                <th>
+                  <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='英文名称'>
+                    {getFieldDecorator('ENNAME', {
+                      initialValue: ENNAME
+                    })(<Input />)}
+                  </FormItem>
+                </th>
                 <th width='50%'>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='关联页类型'>
                     {getFieldDecorator('RTYPE', {
@@ -119,6 +138,8 @@ class RelationItemForm extends Component {
                     )}
                   </FormItem>
                 </th>
+              </tr>
+              <tr>
                 <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='图标'>
                     {getFieldDecorator('ICON', { initialValue: ICON })(

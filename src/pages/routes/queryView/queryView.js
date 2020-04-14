@@ -1,7 +1,7 @@
 /*
  * @Author: hjh
  * @Date: 2019-12-13 09:16:42
- * @LastEditTime : 2019-12-30 14:17:54
+ * @LastEditTime: 2020-04-07 15:44:29
  * @Descripttion: 查询视图
  */
 import React from 'react'
@@ -43,6 +43,10 @@ const columns = [
     dataIndex: 'NAME'
   },
   {
+    title: '英文名称',
+    dataIndex: 'ENNAME'
+  },
+  {
     title: '查询对象',
     dataIndex: 'ITEMNO'
   },
@@ -57,14 +61,8 @@ const columns = [
       )
     }
   },
-  {
-    title: '控制权限',
-    dataIndex: 'CONTROLAUTH'
-  },
-  {
-    title: '支持复制',
-    dataIndex: 'COPYABLE'
-  }
+  { title: '控制权限', dataIndex: 'CONTROLAUTH' },
+  { title: '支持复制', dataIndex: 'COPYABLE' }
 ]
 const QueryView = ({ dispatch, queryView, isModeling }) => {
   let { list, record, visible, selectedRowKeys, itemList, selectedRows, PID, ITEMNO, menuList, showTab } = queryView
@@ -72,16 +70,7 @@ const QueryView = ({ dispatch, queryView, isModeling }) => {
   let disabled = !(selectedRows[0] && isModeling && (STATE === 'U' || STATE === 'C'))
   const onSelectChange = (selectedRowKeys, selectedRows) => {
     const { ITEMNO, ID } = selectedRows[0]
-    dispatch({
-      type: 'queryView/packet',
-      payload: {
-        selectedRowKeys,
-        selectedRows,
-        ITEMNO,
-        showTab: true,
-        PID: ID
-      }
-    })
+    dispatch({ type: 'queryView/packet', payload: { selectedRowKeys, selectedRows, ITEMNO, showTab: true, PID: ID } })
     dispatch({ type: 'queryView/getRelationMenu', payload: { PID: ID } })
   }
 

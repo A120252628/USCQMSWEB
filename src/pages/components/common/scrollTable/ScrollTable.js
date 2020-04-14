@@ -1,7 +1,7 @@
 /*
  * @Author: hjh
  * @Date: 2019-07-03 17:01:17
- * @LastEditTime : 2020-01-02 16:20:18
+ * @LastEditTime: 2020-03-25 15:29:28
  * @Descripttion: 带有右键菜单和滚动条的table
  */
 
@@ -73,7 +73,7 @@ class ScrollTable extends Component {
     } else {
       const columns = this.props.engine.itemGrid ? this.props.engine.itemGrid.gridFieldList : []
       if (columns && columns.length > 0) {
-        const newColumns = setColumn(columns)
+        const newColumns = setColumn(columns, this.props.engine.namespace)
         this.setState({
           columns: newColumns
         })
@@ -89,7 +89,7 @@ class ScrollTable extends Component {
       const columns = this.props.engine.itemGrid ? this.props.engine.itemGrid.gridFieldList : []
       const nextColumns = nextProps.engine.itemGrid.gridFieldList
       if (nextColumns !== columns) {
-        const newColumns = setColumn(nextColumns)
+        const newColumns = setColumn(nextColumns, nextProps.engine.namespace)
         this.setState({
           columns: newColumns
         })

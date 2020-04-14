@@ -1,9 +1,9 @@
 import * as commonService from '../../service/commonService'
 import { message } from 'antd'
 
-const tableName = 'usc_model_grid_field'
+const tableName = 'usc_model_mq_listener'
 export default {
-  namespace: 'globalField',
+  namespace: 'msgListener',
   state: {
     visible: false,
     list: [],
@@ -24,7 +24,7 @@ export default {
     ) {
       let { data } = yield call(commonService.get, '/ModelItemRelationInfo/selectByCondition', {
         tableName,
-        condition: `rootid='${PID}'`
+        condition: `itemid='${PID}'`
       })
       yield put({
         type: 'packet',
@@ -40,7 +40,7 @@ export default {
       let data = {}
       let newValues = { tableName }
       if (!record.ID) {
-        newValues = { ...newValues, PID, fk: 'rootid', data: values }
+        newValues = { ...newValues, PID, fk: 'itemid', data: values }
         data = yield call(commonService.post, '/ModelItemRelationInfo/createData', newValues)
       } else {
         newValues.data = record
@@ -63,9 +63,9 @@ export default {
     ) {
       const userName = localStorage.getItem('userName')
       const dataList = { ID, duser: userName }
-      let { data } = yield call(commonService.post, '/ModelItemRelationInfo/delete', {
+      let { data } = yield call(commonService.post, '/ModelItemRelationInfo/deleteMenu', {
         tableName,
-        data: [dataList],
+        data: dataList,
         state: STATE
       })
       if (data) {

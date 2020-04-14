@@ -1,7 +1,7 @@
 /*
  * @Author: hjh
  * @Date: 2019-08-09 16:50:41
- * @LastEditTime : 2019-12-20 14:34:22
+ * @LastEditTime: 2020-04-14 14:30:26
  * @Descripttion: 参数集合
  */
 export const reqParamMap = [
@@ -34,7 +34,8 @@ export const wtypeMap = [
   { name: '分类对象视图', value: 'classItemView' },
   { name: '批量新增', value: 'batchAdd' },
   { name: '下载', value: 'downLoad' },
-  { name: '打印', value: 'print' }
+  // { name: '打印', value: 'print' },
+  { name: '报表', value: 'report' }
 ]
 
 export const editorMap = [
@@ -87,6 +88,7 @@ export const facetypeMap = [
   { value: 3, name: '三级关联页面' },
   { value: 4, name: '分类关联页面' },
   { value: 5, name: '自动分类页面' },
+  { value: 6, name: '报表页面' },
   { value: 21, name: '质检录入页面' }
 ]
 
@@ -109,3 +111,5 @@ export const relationTypeMap = [
   { name: '输出', value: 'output' },
   { name: '动态关联页', value: 'dynamicRelationPage' }
 ]
+
+export const mqMtype = ['SQL脚本', '存储过程', '存储过程', 'JS脚本']

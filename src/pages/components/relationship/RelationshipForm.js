@@ -72,7 +72,7 @@ class RelationshipForm extends Component {
   render() {
     const { getFieldDecorator } = this.props.form //声明验证
     const { fieldList } = this.state
-    const { ID, NO, NAME, RELATIONITEM, ITEMA, ITEMB, PITEM, STATE, SUPQUERY, SORTFIELDS } = this.props.record //声明record
+    const { ID, NO, NAME, RELATIONITEM, ITEMA, ITEMB, PITEM, STATE, SUPQUERY, SORTFIELDS, ENNAME } = this.props.record //声明record
     return (
       <div>
         <Form onSubmit={this.Ok}>
@@ -98,6 +98,13 @@ class RelationshipForm extends Component {
               </tr>
               <tr>
                 <td>
+                  <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='英文名称'>
+                    {getFieldDecorator('ENNAME', {
+                      initialValue: ENNAME
+                    })(<Input />)}
+                  </FormItem>
+                </td>
+                <td>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='关系对象'>
                     {getFieldDecorator('RELATIONITEM', {
                       rules: [{ required: true, message: '必填项!' }],
@@ -105,6 +112,8 @@ class RelationshipForm extends Component {
                     })(<Input disabled addonAfter={<Icon type='plus' onClick={this.openSelectItemNo(2)} />} />)}
                   </FormItem>
                 </td>
+              </tr>
+              <tr>
                 <td>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='关系集合父对象'>
                     {getFieldDecorator('PITEM', {
@@ -118,8 +127,6 @@ class RelationshipForm extends Component {
                     )}
                   </FormItem>
                 </td>
-              </tr>
-              <tr>
                 <td>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='对象A'>
                     {getFieldDecorator('ITEMA', {
@@ -128,6 +135,8 @@ class RelationshipForm extends Component {
                     })(<Input disabled addonAfter={<Icon type='plus' onClick={this.openSelectItemNo(0)} />} />)}
                   </FormItem>
                 </td>
+              </tr>
+              <tr>
                 <td>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='对象B'>
                     {getFieldDecorator('ITEMB', {
@@ -136,8 +145,6 @@ class RelationshipForm extends Component {
                     })(<Input disabled addonAfter={<Icon type='plus' onClick={this.openSelectItemNo(1)} />} />)}
                   </FormItem>
                 </td>
-              </tr>
-              <tr>
                 <td>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='支持搜索'>
                     {getFieldDecorator('SUPQUERY', {
@@ -145,8 +152,6 @@ class RelationshipForm extends Component {
                       valuePropName: 'checked'
                     })(<Checkbox />)}
                   </FormItem>
-                </td>
-                <td>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }}>
                     {getFieldDecorator('ID', {
                       initialValue: ID

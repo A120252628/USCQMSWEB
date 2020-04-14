@@ -5,6 +5,7 @@ import React, { Component } from 'react'
 import { Form, Input, message, Select, Icon, Checkbox } from 'antd'
 import { connect } from 'dva'
 import SelectMenu from './SelectMenu'
+import SelectInfoBus from './SelectInfoBus'
 import SelectItemNo from './SelectItemNo'
 import Modal from '../common/Modal'
 import { reqParamMap, wtypeMap } from '../../../utils/paramsConfig'
@@ -43,7 +44,8 @@ class WorkMenuForm extends Component {
   state = {
     WTYPE: '',
     visible: false,
-    visible2: false
+    visible2: false,
+    IMPLTYPE: false
   }
   toogleModal = () => {
     let { WTYPE, MNO, ITEMNO } = this.props.record
@@ -107,8 +109,8 @@ class WorkMenuForm extends Component {
 
   componentDidMount() {
     const { record } = this.props
-    const { WTYPE, ICON } = record
-    this.setState({ ICON, WTYPE })
+    const { WTYPE, ICON, IMPLTYPE } = record
+    this.setState({ ICON, WTYPE, IMPLTYPE })
     this.getMnoList(WTYPE)
   }
 
@@ -145,7 +147,9 @@ class WorkMenuForm extends Component {
 
   //添加的时候弹出model
   showWorkMenu = () => {
-    this.props.dispatch({ type: 'selectMenu/query', payload: { TYPE: 1, onSelect: this.menuSelect } })
+    this.state.IMPLTYPE
+      ? this.props.dispatch({ type: 'selectInfoBus/query', payload: { onSelect: this.InfoBusSelect } })
+      : this.props.dispatch({ type: 'selectMenu/query', payload: { TYPE: 1, onSelect: this.menuSelect } })
   }
   //保存添加选择的数据
   menuSelect = data => {
@@ -154,6 +158,12 @@ class WorkMenuForm extends Component {
     this.getMnoList(WTYPE)
     this.setState({ WTYPE, ICON })
     this.props.form.setFieldsValue({ NO, NAME, IMPLCLASS, WEBPATH, WTYPE, REQPARAM, ICON, TITLE })
+  }
+  InfoBusSelect = data => {
+    let { NO, NAME, WTYPE, REQPARAM, ICON, TITLE } = data
+    REQPARAM = REQPARAM && REQPARAM.split(';')
+    this.setState({ WTYPE, ICON })
+    this.props.form.setFieldsValue({ NAME, IMPLCLASS: NO, WTYPE, REQPARAM, ICON, TITLE })
   }
 
   setIconName = name => {
@@ -202,6 +212,9 @@ class WorkMenuForm extends Component {
       }
     })
   }
+  onIMPLTYPEChange = e => {
+    this.setState({ IMPLTYPE: e.target.checked })
+  }
 
   render() {
     const { getFieldDecorator } = this.props.form
@@ -212,9 +225,7 @@ class WorkMenuForm extends Component {
       NAME,
       IMPLCLASS,
       MTYPE,
-      REMARK,
       PID,
-      WEBPATH,
       PARAM,
       ABTYPE,
       REQPARAM,
@@ -222,7 +233,9 @@ class WorkMenuForm extends Component {
       MNO,
       ITEMNO,
       PROPERTYPARAM,
-      TITLE
+      TITLE,
+      IMPLTYPE,
+      ENNAME
     } = this.props.record
     const { ICON, visible, visible2, fieldList } = this.state
     const { propertyList, relationList } = this.props.tableConfig
@@ -300,13 +313,13 @@ class WorkMenuForm extends Component {
                 })(<Input disabled={isABAction} />)}
               </FormItem>
             </div>
-            {/* <div style={{ width: '50%' }}>
-              <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='请求路径'>
-                {getFieldDecorator('WEBPATH', {
-                  initialValue: WEBPATH
+            <div style={{ width: '50%' }}>
+              <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='英文名称'>
+                {getFieldDecorator('ENNAME', {
+                  initialValue: ENNAME
                 })(<Input />)}
               </FormItem>
-            </div> */}
+            </div>
             {MTYPE !== 1 && (
               <div style={{ width: '50%' }}>
                 <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='参数'>
@@ -364,24 +377,25 @@ class WorkMenuForm extends Component {
             {(WTYPE === 'itemRelationPage' ||
               WTYPE === 'itemPropertyPage' ||
               this.state.WTYPE === 'itemRelationPage' ||
-              this.state.WTYPE === 'itemPropertyPage') && (
-              <div style={{ width: '50%' }}>
-                <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='弹窗标识'>
-                  {getFieldDecorator('MNO', {
-                    rules: [{ required: true, message: '此项必填!' }],
-                    initialValue: MNO
-                  })(
-                    <Select onChange={this.onMnoChange} style={{ width: '100%' }}>
-                      {mnoList.map(item => (
-                        <Option value={item.NO} key={item.NAME}>
-                          {item.NAME}
-                        </Option>
-                      ))}
-                    </Select>
-                  )}
-                </FormItem>
-              </div>
-            )}
+              this.state.WTYPE === 'itemPropertyPage') &&
+              !this.state.IMPLTYPE && (
+                <div style={{ width: '50%' }}>
+                  <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='弹窗标识'>
+                    {getFieldDecorator('MNO', {
+                      rules: [{ required: true, message: '此项必填!' }],
+                      initialValue: MNO
+                    })(
+                      <Select onChange={this.onMnoChange} style={{ width: '100%' }}>
+                        {mnoList.map(item => (
+                          <Option value={item.NO} key={item.NAME}>
+                            {item.NAME}
+                          </Option>
+                        ))}
+                      </Select>
+                    )}
+                  </FormItem>
+                </div>
+              )}
             <div style={{ width: '50%' }}>
               <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='弹窗标题'>
                 {getFieldDecorator('TITLE', {
@@ -389,16 +403,26 @@ class WorkMenuForm extends Component {
                 })(<Input />)}
               </FormItem>
             </div>
-            {/* <div style={{ width: '50%' }}>
-              <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='备注'>
-                {getFieldDecorator('REMARK', {
-                  initialValue: REMARK
-                })(<TextArea autoSize={{ minRows: 2 }} />)}
+            <div style={{ width: '50%' }}>
+              <FormItem
+                onChange={this.onIMPLTYPEChange}
+                {...formItemLayout}
+                style={{ marginBottom: 0 }}
+                label='信息总线'
+              >
+                {getFieldDecorator('IMPLTYPE', {
+                  initialValue: IMPLTYPE,
+                  valuePropName: 'checked'
+                })(<Checkbox />)}
               </FormItem>
-            </div> */}
+            </div>
             {MTYPE !== 1 && (
               <div style={{ width: '100%' }}>
-                <FormItem {...formItemLayout2} style={{ marginBottom: 0 }} label='实现类'>
+                <FormItem
+                  {...formItemLayout2}
+                  style={{ marginBottom: 0 }}
+                  label={this.state.IMPLTYPE ? '信息总线' : '实现类'}
+                >
                   {getFieldDecorator('IMPLCLASS', {
                     rules: [{ required: true, message: '此项必填!' }],
                     initialValue: IMPLCLASS
@@ -428,6 +452,7 @@ class WorkMenuForm extends Component {
           </div>
         </Form>
         <SelectMenu />
+        <SelectInfoBus />
         <SelectItemNo />
         {(MNO || this.state.MNO) && (
           <PropertyParamForm

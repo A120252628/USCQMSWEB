@@ -5,7 +5,28 @@ const modelMenus = [
   { NAME: '关联关系', ICON: 'api', NO: 'relationship', ID: 'relationship', PID: 'config' },
   { NAME: '查询视图', ICON: 'file-search', NO: 'queryView', ID: 'queryView', PID: 'config' },
   { NAME: '自动分类视图', ICON: 'read', NO: 'autoClass', ID: 'autoClass', PID: 'config' },
-  { NAME: '全局表格', ICON: 'table', NO: 'globalTable', ID: 'globalTable', PID: 'config' }
+  { NAME: '全局表格', ICON: 'table', NO: 'globalTable', ID: 'globalTable', PID: 'config' },
+  { NAME: '消息事务', ICON: 'read', NO: 'mqAffair', ID: 'mqAffair', PID: 'config' },
+  { NAME: '信息总线', ICON: 'table', NO: 'msgLines', ID: 'msgLines', PID: 'config' },
+  { NAME: '报表管理', ICON: '', NO: 'reportList', ID: 'reportList', PID: 'config' },
+  {
+    NAME: '网格报表',
+    ICON: '',
+    NO: 'gridReportList',
+    ID: 'gridReportList',
+    PID: 'reportList',
+    FACETYPE: 6,
+    PARAMS: JSON.stringify({ url: 'http://127.0.0.1:18080/RDP-SERVER/modules/rdp/list.html' })
+  },
+  {
+    NAME: '大屏报表',
+    ICON: '',
+    NO: 'screenReportList',
+    ID: 'screenReportList',
+    PID: 'reportList',
+    FACETYPE: 6,
+    PARAMS: JSON.stringify({ url: 'http://127.0.0.1:18080/RDP-SERVER/modules/bddp/home.html' })
+  }
 ]
 
 export default {

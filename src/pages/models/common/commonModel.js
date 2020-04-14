@@ -198,7 +198,7 @@ export default {
                 // 不做数据更新
                 break
               default:
-                yield put({ type: `${namespace}/packet`, payload: { dataList: data.dataList } })
+                yield put({ type: `${namespace}/packet`, payload: { dataList: data.dataList, showTab: false } })
                 return
             }
             yield put({

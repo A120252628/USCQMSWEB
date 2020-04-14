@@ -1,7 +1,7 @@
 /*
  * @Author: hjh
  * @Date: 2019-07-29 13:56:31
- * @LastEditTime : 2019-12-25 10:35:36
+ * @LastEditTime: 2020-03-26 15:39:07
  * @Descripttion: 对象表格组件
  */
 
@@ -67,6 +67,11 @@ const Grid = ({ dispatch, grid, PID, gridList, gridItemList, disabled, isModelin
       title: '表格名称',
       dataIndex: 'NAME',
       width: 100
+    },
+    {
+      title: '英文名称',
+      dataIndex: 'ENNAME',
+      width: 200
     }
   ]
   const columns2 = [
@@ -81,6 +86,11 @@ const Grid = ({ dispatch, grid, PID, gridList, gridItemList, disabled, isModelin
       dataIndex: 'NAME',
       width: 100,
       ...getColumnSearchProps('NAME', '字段名称')
+    },
+    {
+      title: '英文名称',
+      dataIndex: 'ENNAME',
+      width: 200
     },
     {
       title: '列宽',

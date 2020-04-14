@@ -109,9 +109,9 @@ export const clickBtn = (item, engine, model) => {
 }
 
 export const confirmBtn = (item, namespace, values, callback) => {
-  let { reqparam, mno, id, implclass } = item
+  let { reqparam, mno, id, implclass, impltype } = item
   reqparam = (reqparam && reqparam.split(';')) || []
-  let newValues = { mno, menuId: id, implclass, file: values.file }
+  let newValues = { mno, menuId: id, implclass, file: values.file, impltype: impltype ? true : false }
   reqparam.forEach(item => {
     if (item === 'classBusinessItemNo') {
       newValues.itemNo = values[item]

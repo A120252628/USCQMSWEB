@@ -14,6 +14,7 @@ const TabPane = Tabs.TabPane
  * @date 2019-05-08
  */
 const UpAndDownHoc = engine => WrappedComponent => {
+  console.log(engine)
   return class extends Component {
     onClick(record) {
       if (!engine.itemRelationPage || engine.itemRelationPage.length === 0) {
@@ -38,7 +39,7 @@ const UpAndDownHoc = engine => WrappedComponent => {
 
     render() {
       let { panes, showTab, selectedRows } = this.props.model
-      const { id, itemID, facetype, itemNo } = engine
+      const { id, itemID, facetype, itemNo, height } = engine
       // panes = panes.filter(item => item.key !== id && item.key !== itemID)
       const closeBtn = (
         <Tooltip title='关闭'>
@@ -46,7 +47,7 @@ const UpAndDownHoc = engine => WrappedComponent => {
         </Tooltip>
       )
       return (
-        <div className={styles.flexY}>
+        <div className={styles.flexY} style={{ height: height || '100%' }}>
           <DragCmp height={showTab ? '40%' : '100%'} canResizing={{ bottom: true }} showTab={showTab}>
             <div className={styles.flexX}>
               <DragCmp

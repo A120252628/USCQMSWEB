@@ -27,7 +27,7 @@ class GridItemForm extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form
-    const { ID, NO, NAME, EDITABLE, WIDTH, ALIGN, SCREEN } = this.props.record
+    const { ID, NO, NAME, EDITABLE, WIDTH, ALIGN, SCREEN, ENNAME } = this.props.record
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -93,6 +93,13 @@ class GridItemForm extends Component {
                 </th>
               </tr>
               <tr>
+                <th>
+                  <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='英文名称'>
+                    {getFieldDecorator('ENNAME', {
+                      initialValue: ENNAME
+                    })(<Input />)}
+                  </FormItem>
+                </th>
                 <th width='50%'>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='列宽'>
                     {getFieldDecorator('WIDTH', {
@@ -100,6 +107,8 @@ class GridItemForm extends Component {
                     })(<Input addonAfter='px' />)}
                   </FormItem>
                 </th>
+              </tr>
+              <tr>
                 <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='对齐方式'>
                     {getFieldDecorator('ALIGN', {
@@ -113,8 +122,6 @@ class GridItemForm extends Component {
                     )}
                   </FormItem>
                 </th>
-              </tr>
-              <tr>
                 <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='可编辑'>
                     {getFieldDecorator(`EDITABLE`, {
@@ -123,6 +130,8 @@ class GridItemForm extends Component {
                     })(<Checkbox />)}
                   </FormItem>
                 </th>
+              </tr>
+              <tr>
                 <th>
                   <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='可筛选'>
                     {getFieldDecorator(`SCREEN`, {

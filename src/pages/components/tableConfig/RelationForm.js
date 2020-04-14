@@ -37,7 +37,7 @@ class RelationForm extends Component {
   }
   render() {
     const { getFieldDecorator } = this.props.form //声明验证
-    const { NO, NAME, ID } = this.props.record //声明record
+    const { NO, NAME, ID, ENNAME } = this.props.record //声明record
     return (
       <Form onSubmit={this.Ok}>
         <table width='100%'>
@@ -61,6 +61,15 @@ class RelationForm extends Component {
                   {getFieldDecorator('NAME', {
                     rules: [{ required: true, message: '请输入标识名称!' }],
                     initialValue: NAME
+                  })(<Input />)}
+                </FormItem>
+              </th>
+            </tr>
+            <tr>
+              <th>
+                <FormItem {...formItemLayout} style={{ marginBottom: 0 }} label='英文名称'>
+                  {getFieldDecorator('ENNAME', {
+                    initialValue: ENNAME
                   })(<Input />)}
                 </FormItem>
               </th>

@@ -1,7 +1,7 @@
 /*
  * @Author: hjh
  * @Date: 2019-12-12 16:44:46
- * @LastEditTime : 2019-12-26 17:41:04
+ * @LastEditTime: 2020-03-26 15:40:22
  * @Descripttion: 关联关系
  */
 import React from 'react'
@@ -52,6 +52,11 @@ const columns = [
     title: '关系名称',
     dataIndex: 'NAME',
     width: 150
+  },
+  {
+    title: '英文名称',
+    dataIndex: 'ENNAME',
+    width: 200
   },
   {
     title: '关系对象',

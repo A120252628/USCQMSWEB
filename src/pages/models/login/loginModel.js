@@ -25,7 +25,7 @@ export default {
             callback(data)
           }
         } else {
-          const { info, clientID, userId, userName, employeeName, dataList } = data
+          const { info, clientID, userId, userName, employeeName, dataList, AcceptLanguage } = data
           message.info(info)
           sessionStorage.setItem('clientID', clientID)
           sessionStorage.setItem('isAuthenticated', true)
@@ -33,6 +33,7 @@ export default {
           localStorage.setItem('userId', userId)
           localStorage.setItem('employeeName', employeeName)
           localStorage.setItem('menuData', JSON.stringify(dataList))
+          localStorage.setItem('AcceptLanguage', AcceptLanguage)
           if (localStorage.getItem('modelUser') !== localStorage.getItem('userName')) {
             localStorage.removeItem('isModeling')
             yield put({ type: 'user/packet', payload: { isModeling: false } })

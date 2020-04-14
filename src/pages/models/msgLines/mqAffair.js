@@ -1,9 +1,9 @@
 import * as commonService from '../../service/commonService'
 import { message } from 'antd'
 
-const tableName = 'usc_model_grid_global'
+const tableName = 'usc_model_mq_affair'
 export default {
-  namespace: 'globalTable',
+  namespace: 'mqAffair',
   state: {
     visible: false,
     list: [],
@@ -26,6 +26,13 @@ export default {
         })
       }
     },
+    *queryMqLines({}, { call, put }) {
+      let params = { tableName: 'usc_model_mq_lines', page: 1, pageSize: 200 }
+      let { data } = yield call(commonService.get, '/sysModelItem/packet', params)
+      if (data) {
+        yield put({ type: 'packet', payload: { mqLinesList: data.dataList } })
+      }
+    },
     *addOrEdit(
       {
         payload: { values, oldValues }
@@ -37,8 +44,8 @@ export default {
         let upValues = { tableName, data: oldValues, uData: values }
         data = yield call(commonService.post, '/ModelItemRelationInfo/update', upValues)
       } else {
-        let res = { tableName, data: values, VER: 0 }
-        data = yield call(commonService.post, '/sysModelItem/create', res)
+        let res = { tableName, data: values }
+        data = yield call(commonService.post, '/ModelItemRelationInfo/createData', res)
       }
       if (data.data) {
         message.success(data.data.info)
@@ -52,7 +59,7 @@ export default {
       },
       { call, put }
     ) {
-      let { data } = yield call(commonService.post, '/sysModelItem/delete', { tableName, data: [record] })
+      let { data } = yield call(commonService.post, '/ModelItemRelationInfo/deleteMenu', { tableName, data: record })
       if (data) {
         message.success(data.info)
         yield put({ type: 'query' })

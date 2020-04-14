@@ -1,7 +1,7 @@
 /*
  * @Author: hjh
  * @Date: 2019-09-23 10:37:33
- * @LastEditTime : 2019-12-26 17:44:45
+ * @LastEditTime: 2020-03-26 15:43:27
  * @Descripttion: 自动分类视图
  */
 
@@ -41,6 +41,10 @@ const columns = [
   {
     title: '名称',
     dataIndex: 'NAME'
+  },
+  {
+    title: '英文名称',
+    dataIndex: 'ENNAME'
   },
   {
     title: '查询对象',

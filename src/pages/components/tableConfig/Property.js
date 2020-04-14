@@ -1,7 +1,7 @@
 /*
  * @Author: hjh
  * @Date: 2019-07-29 13:56:31
- * @LastEditTime : 2019-12-26 16:30:27
+ * @LastEditTime: 2020-03-26 15:39:26
  * @Descripttion: 对象属性组件
  */
 
@@ -62,6 +62,11 @@ const Property = ({ dispatch, property, PID, propertyList, propertyItemList, dis
       title: '属性页名称',
       dataIndex: 'NAME',
       width: 120
+    },
+    {
+      title: '英文名称',
+      dataIndex: 'ENNAME',
+      width: 200
     },
     {
       title: '列数',
@@ -138,6 +143,11 @@ const Property = ({ dispatch, property, PID, propertyList, propertyItemList, dis
       dataIndex: 'NAME',
       width: 200,
       ...getColumnSearchProps('NAME', '属性名称')
+    },
+    {
+      title: '英文名称',
+      dataIndex: 'ENNAME',
+      width: 200
     },
     {
       title: '可编辑',

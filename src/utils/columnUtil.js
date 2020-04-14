@@ -1,9 +1,16 @@
-import { Checkbox, Rate, Tooltip, Input, Button, Icon } from 'antd'
+import { Checkbox, Rate, Tooltip, Input, Button, Icon, Tag } from 'antd'
 
-export const setColumn = (columns = []) => {
+const clickLink = (params, text, id, namespace) => () => {
+  const { itemNo, condition } = JSON.parse(params)
+  window.g_app._store.dispatch({
+    type: `popup/loadPopup`,
+    payload: { itemNo, condition, clickButton: { id, title: text, wtype: 'linkPage' }, namespace }
+  })
+}
+export const setColumn = (columns = [], namespace) => {
   let newColumns = []
   columns.forEach(item => {
-    const { id, name, no, align, editParams, editor, width } = item
+    const { id, name, no, align, editParams, editor, width, supLink, linkParams } = item
     let column = {
       key: id,
       title: name,
@@ -11,25 +18,27 @@ export const setColumn = (columns = []) => {
       align,
       ellipsis: true,
       width: Number(`${width}`),
-      render(text) {
+      render(text, record) {
         let cmp = <span>{text}</span>
-        let style = null
         if (editParams && JSON.parse(editParams)) {
           const params = JSON.parse(editParams).values
           if (params && params[0] && params[0].color) {
             const num = params.findIndex(item => item.name === text)
-            if (num !== -1) style = { background: params[num].color }
+            if (num !== -1) cmp = <Tag color={params[num].color}>{text}</Tag>
           }
         } else if (editor === 'CheckBox') {
           cmp = <Checkbox checked={text} />
         } else if (editor === 'Rate') {
           cmp = <Rate value={text} disabled />
         }
-        return (
-          <Tooltip title={cmp} style={style}>
-            {cmp}
-          </Tooltip>
-        )
+        if (supLink) {
+          cmp = (
+            <Button type='link' size='small' onClick={clickLink(linkParams, text, record.ID, namespace)}>
+              {text}
+            </Button>
+          )
+        }
+        return <Tooltip title={cmp}>{cmp}</Tooltip>
       }
     }
     newColumns.push(column)

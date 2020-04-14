@@ -23,7 +23,7 @@ export function get(path, payload = {}) {
  */
 export function post(path, payload = {}) {
   const userName = localStorage.getItem('userName')
-  payload.userName = userName
+  if (typeof payload === 'object') payload.userName = userName
   return request('api' + path, {
     method: 'POST',
     body: JSON.stringify(payload)

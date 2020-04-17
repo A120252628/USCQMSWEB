@@ -10,6 +10,15 @@ const modelMenus = [
   { NAME: '信息总线', ICON: 'table', NO: 'msgLines', ID: 'msgLines', PID: 'config' },
   { NAME: '报表管理', ICON: '', NO: 'reportList', ID: 'reportList', PID: 'config' },
   {
+    NAME: '数据源',
+    ICON: '',
+    NO: 'reportDataBase',
+    ID: 'reportDataBase',
+    PID: 'reportList',
+    FACETYPE: 6,
+    PARAMS: JSON.stringify({ url: 'http://127.0.0.1:18080/RDP-SERVER/modules/ser/config/rdpDataConfig.html' })
+  },
+  {
     NAME: '网格报表',
     ICON: '',
     NO: 'gridReportList',

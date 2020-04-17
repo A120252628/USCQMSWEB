@@ -69,7 +69,8 @@ export const ftypeMap = [
   { type: 'FLOAT', name: '单精度浮点型' },
   { type: 'BOOLEAN', name: '布尔型' },
   { type: 'NUMERIC', name: '数值类型' },
-  { type: 'LONGTEXT', name: '富文本类型' }
+  { type: 'LONGTEXT', name: '富文本类型' },
+  { type: 'BLOB', name: '二进制' }
 ]
 
 export const formatMap = [

@@ -120,8 +120,9 @@ class FieldForm extends Component {
       })
     }
     this.setState({
-      isFlengthDisabled: value === 'BOOLEAN' || value === 'DATETIME' || value === 'LONGTEXT' ? true : false,
-      isFlengthRequired: value === 'DATETIME' || value === 'LONGTEXT' ? false : true,
+      isFlengthDisabled:
+        value === 'BOOLEAN' || value === 'DATETIME' || value === 'LONGTEXT' || value === 'BLOB' ? true : false,
+      isFlengthRequired: value === 'DATETIME' || value === 'LONGTEXT' || value === 'BLOB' ? false : true,
       isAccuracyDisabled: value === 'FLOAT' || value === 'DOUBLE' || value === 'NUMERIC' ? false : true
     })
   }
@@ -165,7 +166,7 @@ class FieldForm extends Component {
       EDITOR,
       ACCURACY,
       TYPE,
-      REMARK,
+      // REMARK,
       ONLY,
       ALLOWNULL,
       DEFAULTV,
@@ -439,5 +440,6 @@ class FieldForm extends Component {
     )
   }
 }
+
 //使用表单共享出去的方式
 export default Modal(connect()(Form.create()(FieldForm)))
